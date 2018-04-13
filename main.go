@@ -7,8 +7,13 @@ import (
 	"strings"
 )
 
-func pr(w http.ResponseWriter, r *http.Request) {
+var l string
 
+func pr(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "%s", l)
+}
+
+func main() {
 	var s, m, q []string
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
@@ -37,12 +42,7 @@ func pr(w http.ResponseWriter, r *http.Request) {
 
 	d := unique(m)
 
-	l := strings.Join(d, "\n")
-
-	fmt.Fprintf(w, "%s", l)
-}
-
-func main() {
+	l = strings.Join(d, "\n")
 
 	http.HandleFunc("/", pr)
 
