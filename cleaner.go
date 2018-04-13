@@ -35,9 +35,9 @@ func cleaner(url string) (string, error) {
 
 	s := buf.String()
 
-	m := strings.Replace(s, `<textarea onclick="this.focus();this.select()" style="font-size: 11pt; font-weight: bold; width: 500px; height: 300px; background-color: #000000; color: #0065dd;" wrap="hard">`, "", 1)
+	m := strings.Replace(s, `<textarea onclick="this.focus();this.select()" style="font-size: 11pt; font-weight: bold; width: 500px; height: 300px; background-color: #000000; color: #0065dd;" wrap="hard">`, "", 0)
 
-	m1 := strings.Replace(m, `</textarea>`, "", 1)
+	m1 := strings.Replace(m, `</textarea>`, "", 0)
 
 	return m1, err
 

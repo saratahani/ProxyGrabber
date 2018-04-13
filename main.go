@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
+	"net/http"
 	"runtime"
 	"strings"
 )
 
-func main() {
+func pr(w http.ResponseWriter, r *http.Request) {
 
 	var s, m, q []string
 
@@ -32,4 +34,18 @@ func main() {
 			m = append(m, r.Addr)
 		}
 	}
+
+	d := unique(m)
+
+	l := strings.Join(d, "\n")
+
+	fmt.Fprintf(w, "%s", l)
+}
+
+func main() {
+
+	http.HandleFunc("/", pr)
+
+	http.ListenAndServe(":80", nil)
+
 }
