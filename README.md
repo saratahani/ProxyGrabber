@@ -7,4 +7,8 @@ SOCKS5 ProxyGrabber
 
 On http://free-telegram-proxy.tk/ you can find free socks5 proxies
 
-![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/example.jpg)
+![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
+
+# License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
