@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 	"runtime"
 	"strings"
@@ -44,7 +44,11 @@ func fetchFreshProxies() {
 }
 
 func pr(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", l)
+	t, _ := template.ParseFiles("index.html")
+	p := struct {
+		Proxies string
+	}{Proxies: l}
+	t.Execute(w, p)
 }
 
 func server() {
@@ -53,7 +57,7 @@ func server() {
 		for {
 			println("FETCHING..")
 			fetchFreshProxies()
-			time.Sleep(1 * time.Hour)
+			time.Sleep(10 * time.Minute)
 		}
 
 	}()
