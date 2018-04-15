@@ -62,6 +62,8 @@ func server() {
 
 	}()
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
+
 	http.HandleFunc("/", pr)
 
 	http.ListenAndServe(":80", nil)
