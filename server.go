@@ -1,21 +1,18 @@
 package main
 
 import (
+	"encoding/json"
+	"github.com/gorilla/mux"
 	"html/template"
 	"net/http"
-	"runtime"
 	"strings"
 	"time"
 )
 
 var l string
+var s, m, q, d []string
 
 func fetchFreshProxies() {
-
-	var s, m, q []string
-
-	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	respChan := make(chan QR)
 
 	for _, v := range unique(getTag()) {
@@ -38,7 +35,7 @@ func fetchFreshProxies() {
 		}
 	}
 
-	d := unique(m)
+	d = unique(m)
 
 	l = strings.Join(d, "\n")
 }
@@ -51,7 +48,16 @@ func pr(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
+func sendJSON(w http.ResponseWriter, r *http.Request) {
+	j := struct {
+		Proxies []string
+	}{Proxies: d}
+	json.NewEncoder(w).Encode(j)
+}
+
 func server() {
+
+	router := mux.NewRouter()
 
 	go func() {
 		for {
@@ -62,10 +68,12 @@ func server() {
 
 	}()
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))))
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
-	http.HandleFunc("/", pr)
+	router.HandleFunc("/json", sendJSON)
 
-	http.ListenAndServe(":80", nil)
+	router.HandleFunc("/", pr)
+
+	http.ListenAndServe(":80", router)
 
 }
