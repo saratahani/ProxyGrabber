@@ -11,7 +11,7 @@ func checkProxySOCKS(proxyy string, c chan QR) {
 
 	//Sending request through proxy
 	dialer, _ := proxy.SOCKS5("tcp", proxyy, nil, proxy.Direct)
-	timeout := time.Duration(30 * time.Second)
+	timeout := time.Duration(20 * time.Second)
 	httpClient := &http.Client{Timeout: timeout, Transport: &http.Transport{Dial: dialer.Dial}}
 	_, err := httpClient.Get("https://api.ipify.org?format=json")
 
