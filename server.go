@@ -10,7 +10,7 @@ import (
 )
 
 var l string
-var s, m, q, d []string
+var s, m, q []string
 
 func fetchFreshProxies() {
 	respChan := make(chan QR)
@@ -24,34 +24,45 @@ func fetchFreshProxies() {
 		q = append(q, strings.Split(val, "\n")...)
 	}
 
-	for _, proxy := range q {
+	z := unique(q)
+
+	for _, proxy := range z {
 		go checkProxySOCKS(proxy, respChan)
 	}
 
-	for range q {
+	for range z {
 		r := <-respChan
 		if r.Res {
 			m = append(m, r.Addr)
 		}
 	}
 
-	d = unique(m)
-
-	l = strings.Join(d, "\n")
+	l = strings.Join(m, "\n")
 }
 
 func pr(w http.ResponseWriter, r *http.Request) {
+
+	v := random(0, len(m))
+	c := strings.Split(m[v], ":")
+	link := `tg://socks?server=` + c[0] + `&port=` + c[1]
+	i := template.URL(link)
+
 	t, _ := template.ParseFiles("index.html")
+
 	p := struct {
 		Proxies string
-	}{Proxies: l}
+		Link    template.URL
+	}{Proxies: l, Link: i}
+
 	t.Execute(w, p)
 }
 
 func sendJSON(w http.ResponseWriter, r *http.Request) {
+
 	j := struct {
 		Proxies []string
-	}{Proxies: d}
+	}{Proxies: m}
+
 	json.NewEncoder(w).Encode(j)
 }
 
@@ -67,6 +78,8 @@ func server() {
 		}
 
 	}()
+
+	time.Sleep(40 * time.Second)
 
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
