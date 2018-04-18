@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/trigun117/ProxyGrabber)](https://goreportcard.com/report/github.com/trigun117/ProxyGrabber)
+[![Build Status](https://travis-ci.org/trigun117/ProxyGrabber.svg?branch=master)](https://travis-ci.org/trigun117/ProxyGrabber) [![Go Report Card](https://goreportcard.com/badge/github.com/trigun117/ProxyGrabber)](https://goreportcard.com/report/github.com/trigun117/ProxyGrabber)
 # ProxyGrabber
 
 SOCKS5 ProxyGrabber
