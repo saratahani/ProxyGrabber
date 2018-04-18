@@ -11,12 +11,12 @@ import (
 
 func cleaner(url string) (string, error) {
 
-	re, err := http.Get(url)
+	response, err := http.Get(url)
 	if err != nil {
 		return "", err
 	}
 
-	b, err := ioutil.ReadAll(re.Body)
+	b, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return "", err
 	}
@@ -33,12 +33,12 @@ func cleaner(url string) (string, error) {
 	body := cascadia.MustCompile("textarea").MatchFirst(doc)
 	html.Render(buf, body)
 
-	s := buf.String()
+	proxies := buf.String()
 
-	m := strings.Replace(s, `<textarea onclick="this.focus();this.select()" style="font-size: 11pt; font-weight: bold; width: 500px; height: 300px; background-color: #000000; color: #0065dd;" wrap="hard">`, "", 1)
+	cleanProxiesTop := strings.Replace(proxies, `<textarea onclick="this.focus();this.select()" style="font-size: 11pt; font-weight: bold; width: 500px; height: 300px; background-color: #000000; color: #0065dd;" wrap="hard">`, "", 1)
 
-	m1 := strings.Replace(m, `</textarea>`, "", 1)
+	cleanProxiesDown := strings.Replace(cleanProxiesTop, `</textarea>`, "", 1)
 
-	return m1, err
+	return cleanProxiesDown, err
 
 }

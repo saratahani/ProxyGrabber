@@ -17,19 +17,17 @@ func getTag() []string {
 
 	for {
 
-		tt := z.Next()
+		switch token := z.Next(); token {
 
-		switch {
-
-		case tt == html.ErrorToken:
+		case html.ErrorToken:
 			return links
-		case tt == html.StartTagToken:
-			t := z.Token()
 
+		case html.StartTagToken:
+
+			t := z.Token()
 			isAnchor := t.Data == "a"
 
 			if isAnchor {
-
 				for _, a := range t.Attr {
 
 					if a.Key == "href" {
