@@ -1,3 +1,5 @@
+sudo: required
+
 language: go
 
 go:
@@ -13,5 +15,5 @@ script:
   - CGO_ENABLED=0 go build
   - cd ..
   - docker build --rm -t trigun117/grabber .
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
   - docker push trigun117/grabber
