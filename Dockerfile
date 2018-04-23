@@ -1,10 +1,10 @@
 FROM alpine
 
-COPY ./code/code .
+COPY ProxyGrabber .
 COPY ./code/template/static /template/static
 COPY ./code/template/index.html /template
 
-RUN chmod +x code &&\
+RUN chmod +x ProxyGrabber &&\
     apk add --no-cache ca-certificates
 
-ENTRYPOINT [ "./code" ]
+ENTRYPOINT [ "./ProxyGrabber" ]
