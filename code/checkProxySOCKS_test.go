@@ -16,7 +16,7 @@ func TestCheckProxySOCKS(t *testing.T) {
 		t.Fail()
 	}
 
-	CheckProxySOCKS(`159.65.197.7:1080`, ch)
+	CheckProxySOCKS(`185.161.211.17:38157`, ch)
 
 	r = <-ch
 
