@@ -1,6 +1,7 @@
-package main
+package code
 
-func unique(intSlice []string) []string {
+//Unique check slice on uniqueness
+func Unique(intSlice []string) []string {
 	keys := make(map[string]bool)
 	list := []string{}
 	for _, entry := range intSlice {

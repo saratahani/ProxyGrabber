@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+//Removes textarea tags from proxies
 func cleaner(url string) (string, error) {
 
 	response, err := http.Get(url)
@@ -30,6 +31,7 @@ func cleaner(url string) (string, error) {
 
 	buf := new(bytes.Buffer)
 
+	//Search for textarea tag
 	body := cascadia.MustCompile("textarea").MatchFirst(doc)
 	html.Render(buf, body)
 

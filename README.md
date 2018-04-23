@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/trigun117/ProxyGrabber.svg?branch=master)](https://travis-ci.org/trigun117/ProxyGrabber) [![Go Report Card](https://goreportcard.com/badge/github.com/trigun117/ProxyGrabber)](https://goreportcard.com/report/github.com/trigun117/ProxyGrabber)
+[![Build Status](https://travis-ci.org/trigun117/ProxyGrabber.svg?branch=master)](https://travis-ci.org/trigun117/ProxyGrabber) [![codecov](https://codecov.io/gh/trigun117/ProxyGrabber/branch/master/graph/badge.svg)](https://codecov.io/gh/trigun117/ProxyGrabber) [![Go Report Card](https://goreportcard.com/badge/github.com/trigun117/ProxyGrabber)](https://goreportcard.com/report/github.com/trigun117/ProxyGrabber)
 # ProxyGrabber
 
 SOCKS5 ProxyGrabber
 
 # Get Started
 
-On http://free-telegram-proxy.tk/ you can find free socks5 proxies
+On http://telegram-socks.tk you can find free socks5 proxies
 
 ![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
 

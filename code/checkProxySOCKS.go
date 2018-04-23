@@ -1,4 +1,4 @@
-package main
+package code
 
 import (
 	"golang.org/x/net/proxy"
@@ -7,7 +7,7 @@ import (
 )
 
 //CheckProxySOCKS Check proxies on valid
-func checkProxySOCKS(proxyy string, c chan QR) {
+func CheckProxySOCKS(proxyy string, c chan QR) {
 
 	//Sending request through proxy
 	dialer, _ := proxy.SOCKS5("tcp", proxyy, nil, proxy.Direct)

@@ -1,4 +1,4 @@
-package main
+package code
 
 //QR contain info about proxy
 type QR struct {

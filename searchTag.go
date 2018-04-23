@@ -6,6 +6,7 @@ import (
 	"regexp"
 )
 
+//Getting tags from site
 func getTag() []string {
 	var links []string
 
@@ -19,12 +20,15 @@ func getTag() []string {
 
 		switch token := z.Next(); token {
 
+		//Return slice with links if tags end
 		case html.ErrorToken:
 			return links
 
 		case html.StartTagToken:
 
 			t := z.Token()
+
+			//Check if is tag is anchor
 			isAnchor := t.Data == "a"
 
 			if isAnchor {
