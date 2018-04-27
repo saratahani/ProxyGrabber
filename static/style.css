@@ -1,3 +1,7 @@
+h1, h2, h5{
+    color: white;
+}
+
 .btn{
     margin-top: 1.5%;
     color: dodgerblue;
@@ -5,7 +9,7 @@
     font-size: 25px;
 }
 
-p{
+#api{
     float: right;
     font-size: 20px;
     padding-top: 0.17em;
@@ -15,10 +19,6 @@ p{
     display: inline;
     font-size: 30px;
     padding-left: 2%;
-}
-
-h1, h2{
-    color: white;
 }
 
 textarea{
