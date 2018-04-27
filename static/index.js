@@ -1,5 +1,7 @@
 $(function () {
 
+    updateProxy();
+
     setInterval(function() {
         updateProxy();
     }, 60 * 1000);
