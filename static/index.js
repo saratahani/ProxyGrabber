@@ -1,6 +1,7 @@
 $(function () {
 
     updateProxy();
+    proxyButton();
 
     setInterval(function() {
         updateProxy();
