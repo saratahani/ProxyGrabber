@@ -1,7 +1,8 @@
 FROM alpine
 
 COPY ProxyGrabber .
-COPY ./static /static
+COPY ./template/index /template/index
+COPY ./template/static /template/static
 
 RUN apk update && apk add --no-cache ca-certificates
 

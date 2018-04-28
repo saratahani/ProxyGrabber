@@ -5,9 +5,6 @@ $(function () {
 
     setInterval(function() {
         updateProxy();
-    }, 60 * 1000);
-
-    setInterval(function() {
         proxyButton();
     }, 1 * 1000);
 

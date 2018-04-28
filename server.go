@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
+	//"github.com/gorilla/mux"
 	"github.com/trigun117/ProxyGrabber/code"
 	"net/http"
 	"strings"
@@ -41,7 +41,14 @@ func fetchFreshProxies() {
 	uniqueProxies = code.Unique(checkedProxiesArray)
 }
 
-func sendJSON(w http.ResponseWriter, r *http.Request) {
+func cacheHandler(h http.Handler, n string) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "max-age="+n)
+		h.ServeHTTP(w, r)
+	})
+}
+
+func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 	j := struct {
 		Proxies []string
@@ -54,8 +61,6 @@ func sendJSON(w http.ResponseWriter, r *http.Request) {
 
 func server() {
 
-	router := mux.NewRouter()
-
 	go func() {
 		for {
 			fetchFreshProxies()
@@ -64,11 +69,13 @@ func server() {
 
 	}()
 
-	router.HandleFunc("/json", sendJSON)
+	http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "900"))
+
+	http.HandleFunc("/json", sendJSONHandler)
 
 	//loading template files
-	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "31536000")))
 
-	http.ListenAndServe(":80", router)
+	http.ListenAndServe(":80", nil)
 
 }
