@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	//"github.com/gorilla/mux"
 	"github.com/trigun117/ProxyGrabber/code"
 	"net/http"
 	"strings"
