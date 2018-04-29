@@ -1,4 +1,4 @@
-package main
+package code
 
 import (
 	"golang.org/x/net/html"
@@ -6,8 +6,8 @@ import (
 	"regexp"
 )
 
-//Getting tags from site
-func getTag() []string {
+//GetTag getting tags from site
+func GetTag() []string {
 	var links []string
 
 	r := regexp.MustCompile(`^http://www.socksproxylist24.top/\d.*html$`)

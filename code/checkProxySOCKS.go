@@ -23,11 +23,8 @@ func CheckProxySOCKS(prox string, c chan QR) (err error) {
 		return
 	}
 
-	_, err = io.Copy(ioutil.Discard, res.Body)
+	io.Copy(ioutil.Discard, res.Body)
 	res.Body.Close()
-	if err != nil {
-		return
-	}
 
 	c <- QR{Addr: prox, Res: true}
 	return

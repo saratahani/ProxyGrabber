@@ -1,4 +1,4 @@
-package main
+package code
 
 import (
 	"bytes"
@@ -9,25 +9,16 @@ import (
 	"strings"
 )
 
-//Removes textarea tags from proxies
-func cleaner(url string) (string, error) {
+//Cleaner removes textarea tags from proxies
+func Cleaner(url string) string {
 
-	response, err := http.Get(url)
-	if err != nil {
-		return "", err
-	}
+	response, _ := http.Get(url)
 
-	b, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return "", err
-	}
+	b, _ := ioutil.ReadAll(response.Body)
 
 	r := strings.NewReader(string(b))
 
-	doc, err := html.Parse(r)
-	if err != nil {
-		return "", err
-	}
+	doc, _ := html.Parse(r)
 
 	buf := new(bytes.Buffer)
 
@@ -41,6 +32,6 @@ func cleaner(url string) (string, error) {
 
 	cleanProxiesDown := strings.Replace(cleanProxiesTop, `</textarea>`, "", 1)
 
-	return cleanProxiesDown, err
+	return cleanProxiesDown
 
 }

@@ -20,8 +20,8 @@ func fetchFreshProxies() {
 	respChan := make(chan code.QR)
 
 	//creating array with links
-	for _, v := range code.Unique(getTag()) {
-		cleanLinks, _ := cleaner(v)
+	for _, v := range code.Unique(code.GetTag()) {
+		cleanLinks := code.Cleaner(v)
 		linksArray = append(linksArray, cleanLinks)
 	}
 
