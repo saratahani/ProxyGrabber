@@ -3,11 +3,23 @@
 
 SOCKS5 ProxyGrabber
 
+![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
+
+On http://telegram-socks.tk you can find live example
+
 # Get Started
 
-On http://telegram-socks.tk you can find free socks5 proxies
+You can start app with
+```
+./ProxyGrabber
+```
+and then open http://localhost
 
-![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
+Or build docker image from Dockerfile and run with this command
+```
+docker run -d -p 80:80 --restart always image_name
+```
+and then open http://localhost or http://your_server_ip
 
 # License
 
