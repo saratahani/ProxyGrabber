@@ -4,9 +4,12 @@ $(function () {
     proxyButton();
 
     setInterval(function() {
-        updateProxy();
         proxyButton();
     }, 1 * 1000);
+
+    setInterval(function() {
+        updateProxy();
+    }, 60 * 1000);
 
 });
 

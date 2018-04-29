@@ -11,6 +11,12 @@ import (
 var linksArray, checkedProxiesArray, splitedProxies, uniqueProxies []string
 
 func fetchFreshProxies() {
+
+	//reset arrays
+	linksArray = nil
+	splitedProxies = nil
+	checkedProxiesArray = nil
+
 	respChan := make(chan code.QR)
 
 	//creating array with links
@@ -40,6 +46,7 @@ func fetchFreshProxies() {
 	uniqueProxies = code.Unique(checkedProxiesArray)
 }
 
+//browser cache
 func cacheHandler(h http.Handler, n string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "max-age="+n)
@@ -47,6 +54,7 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 	})
 }
 
+//json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 	j := struct {
