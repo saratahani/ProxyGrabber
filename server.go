@@ -71,7 +71,7 @@ func server() {
 	go func() {
 		for {
 			fetchFreshProxies()
-			time.Sleep(5 * time.Minute)
+			time.Sleep(2 * time.Minute)
 		}
 
 	}()

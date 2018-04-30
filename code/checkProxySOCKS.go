@@ -13,9 +13,9 @@ func CheckProxySOCKS(prox string, c chan QR) (err error) {
 
 	//Sending request through proxy
 	dialer, _ := proxy.SOCKS5("tcp", prox, nil, proxy.Direct)
-	timeout := time.Duration(5 * time.Second)
+	timeout := time.Duration(3 * time.Second)
 	httpClient := &http.Client{Timeout: timeout, Transport: &http.Transport{DisableKeepAlives: true, Dial: dialer.Dial}}
-	res, err := httpClient.Get("https://api.ipify.org?format=json")
+	res, err := httpClient.Get("https://telegram.org/")
 
 	if err != nil {
 

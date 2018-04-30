@@ -5,11 +5,11 @@ $(function () {
 
     setInterval(function() {
         proxyButton();
-    }, 1 * 1000);
+    }, 500);
 
     setInterval(function() {
         updateProxy();
-    }, 60 * 1000);
+    }, 30000);
 
 });
 
