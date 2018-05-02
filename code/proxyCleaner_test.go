@@ -6,9 +6,9 @@ import (
 
 func TestProxyCleaner(t *testing.T) {
 
-	link := Unique(GetTag())
+	link := unique(getTag())
 
-	if с := Cleaner(link[0]); с == "" {
+	if с := cleaner(link[0]); с == "" {
 		t.Fail()
 	}
 }

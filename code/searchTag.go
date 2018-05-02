@@ -6,8 +6,8 @@ import (
 	"regexp"
 )
 
-//GetTag getting tags from site
-func GetTag() []string {
+//getTag getting tags from site
+func getTag() []string {
 	var links []string
 
 	r := regexp.MustCompile(`^http://www.socksproxylist24.top/\d.*html$`)

@@ -4,47 +4,9 @@ import (
 	"encoding/json"
 	"github.com/trigun117/ProxyGrabber/code"
 	"net/http"
-	"strings"
+	"runtime"
 	"time"
 )
-
-var linksArray, checkedProxiesArray, splitedProxies, uniqueProxies []string
-
-func fetchFreshProxies() {
-
-	//reset arrays
-	linksArray = nil
-	splitedProxies = nil
-	checkedProxiesArray = nil
-
-	respChan := make(chan code.QR)
-
-	//creating array with links
-	for _, v := range code.Unique(code.GetTag()) {
-		cleanLinks := code.Cleaner(v)
-		linksArray = append(linksArray, cleanLinks)
-	}
-
-	//splitting proxies
-	for _, val := range linksArray {
-		splitedProxies = append(splitedProxies, strings.Split(val, "\n")...)
-	}
-
-	//checking proxies
-	for _, proxy := range splitedProxies {
-		go code.CheckProxySOCKS(proxy, respChan)
-	}
-
-	for range splitedProxies {
-		r := <-respChan
-		if r.Res {
-			checkedProxiesArray = append(checkedProxiesArray, r.Addr)
-		}
-	}
-
-	//checking proxies on uniqueness
-	uniqueProxies = code.Unique(checkedProxiesArray)
-}
 
 //browser cache
 func cacheHandler(h http.Handler, n string) http.Handler {
@@ -59,7 +21,7 @@ func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 	j := struct {
 		Proxies []string
-	}{Proxies: uniqueProxies}
+	}{Proxies: code.UP.Proxy}
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
@@ -70,7 +32,8 @@ func server() {
 
 	go func() {
 		for {
-			fetchFreshProxies()
+			code.FetchFreshProxies()
+			runtime.GC()
 			time.Sleep(2 * time.Minute)
 		}
 

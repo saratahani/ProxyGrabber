@@ -8,7 +8,7 @@ func TestCheckProxySOCKS(t *testing.T) {
 
 	ch := make(chan QR, 1)
 
-	CheckProxySOCKS(`000.00.000.000:0000`, ch)
+	checkProxySOCKS(`000.00.000.000:0000`, ch)
 
 	r := <-ch
 
@@ -16,7 +16,7 @@ func TestCheckProxySOCKS(t *testing.T) {
 		t.Fail()
 	}
 
-	CheckProxySOCKS(`138.201.82.219:8080`, ch)
+	checkProxySOCKS(`51.15.100.63:1080`, ch)
 
 	r = <-ch
 

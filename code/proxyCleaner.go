@@ -9,8 +9,8 @@ import (
 	"strings"
 )
 
-//Cleaner removes textarea tags from proxies
-func Cleaner(url string) string {
+//cleaner removes textarea tags from proxies
+func cleaner(url string) string {
 
 	response, _ := http.Get(url)
 
