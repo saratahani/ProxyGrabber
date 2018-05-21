@@ -5,7 +5,7 @@ SOCKS5 ProxyGrabber
 
 ![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
 
-On http://telegram-socks.tk you can find live example
+On http://proxy-gram.tk you can find live example
 
 # Get Started
 
