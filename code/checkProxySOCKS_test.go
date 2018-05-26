@@ -16,6 +16,8 @@ func TestCheckProxySOCKS(t *testing.T) {
 
 	r := <-ch
 
+	wg.Wait()
+
 	if r.Res != false {
 		t.Fail()
 	}
@@ -24,6 +26,8 @@ func TestCheckProxySOCKS(t *testing.T) {
 	checkProxySOCKS(`71.82.60.237:31679`, ch, &wg)
 
 	r = <-ch
+
+	wg.Wait()
 
 	if r.Res != true {
 		t.Fail()
