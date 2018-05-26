@@ -32,8 +32,8 @@ func server() {
 
 	go func() {
 		for {
+			defer runtime.GC()
 			code.FetchFreshProxies()
-			runtime.GC()
 			time.Sleep(2 * time.Minute)
 		}
 
