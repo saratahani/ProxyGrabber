@@ -5,35 +5,35 @@ import (
 	"sync"
 )
 
-//UniqueProxies contain field Proxy
+// UniqueProxies contain field Proxy
 type UniqueProxies struct {
 	Proxy []string
 }
 
-//UP contains unique checked proxies
+// UP contains unique checked proxies
 var UP UniqueProxies
 
 var linksArray, checkedProxiesArray, splitedProxies []string
 
 var wg sync.WaitGroup
 
-//FetchFreshProxies fetching and checking proxies
+// FetchFreshProxies fetching and checking proxies
 func FetchFreshProxies() error {
 
 	respChan := make(chan QR)
 
-	//creating array with links
+	// creating array with links
 	for _, v := range unique(getTag()) {
 		cleanLinks := cleaner(v)
 		linksArray = append(linksArray, cleanLinks)
 	}
 
-	//splitting proxies
+	// splitting proxies
 	for _, val := range linksArray {
 		splitedProxies = append(splitedProxies, strings.Split(val, "\n")...)
 	}
 
-	//checking proxies
+	// checking proxies
 	for _, proxy := range splitedProxies {
 		wg.Add(1)
 		go checkProxySOCKS(proxy, respChan, &wg)
@@ -50,10 +50,10 @@ func FetchFreshProxies() error {
 
 	wg.Wait()
 
-	//checking proxies on uniqueness
+	// checking proxies on uniqueness
 	UP.Proxy = unique(checkedProxiesArray)
 
-	//reset arrays
+	// reset arrays
 	linksArray = nil
 	splitedProxies = nil
 	checkedProxiesArray = nil
