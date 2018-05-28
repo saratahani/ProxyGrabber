@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+$(function () {
+
     updateProxy();
     proxyButton();
 
@@ -9,25 +10,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
     setInterval(function () {
         updateProxy();
     }, 30000);
+
 });
 
 function updateProxy() {
-    fetch('/json')
-        .then(res => res.json())
-        .then((out) => {
-            document.getElementById('num').innerHTML = out.Proxies.length + ' proxies';
-            document.getElementsByTagName('textarea')[0].innerHTML = out.Proxies.join("\n");
-        })
-        .catch(err => { throw err; });
+    $.getJSON("/json", function (data) {
+        $("#num").html(data.Proxies.length + " proxies");
+        $("textarea").html(data.Proxies.join("\n"));
+    }
+    );
 }
 
 function proxyButton() {
-    fetch('/json')
-        .then(res => res.json())
-        .then((out) => {
-            randomNumber = Math.floor((Math.random() * out.Proxies.length) + 0);
-            randomProxy = out.Proxies[randomNumber].split(":");
-            document.getElementById('b').setAttribute("href", 'tg://socks?server=' + randomProxy[0] + '&port=' + randomProxy[1]);
-        })
-        .catch(err => { throw err; });
+    $.getJSON("/json", function (data) {
+        randomNumber = Math.floor((Math.random() * data.Proxies.length) + 0);
+        randomProxy = data.Proxies[randomNumber].split(":");
+        $("#b").attr("href", 'tg://socks?server=' + randomProxy[0] + '&port=' + randomProxy[1]);
+    }
+    );
 }
