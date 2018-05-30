@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-//browser cache
+// browser cache
 func cacheHandler(h http.Handler, n string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "max-age="+n)
@@ -16,7 +16,7 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 	})
 }
 
-//json response
+// json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 
 	j := struct {
@@ -36,16 +36,13 @@ func server() {
 			code.FetchFreshProxies()
 			time.Sleep(2 * time.Minute)
 		}
-
 	}()
 
 	http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "900"))
 
 	http.HandleFunc("/json", sendJSONHandler)
 
-	//loading template files
 	http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "31536000")))
 
 	http.ListenAndServe(":80", nil)
-
 }
