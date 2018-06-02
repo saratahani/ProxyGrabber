@@ -9,6 +9,12 @@ h1, h2, h5{
     font-size: 25px;
 }
 
+#contact{
+    float: left;
+    font-size: 20px;
+    padding-top: 0.17em;
+}
+
 #api{
     float: right;
     font-size: 20px;
@@ -18,7 +24,7 @@ h1, h2, h5{
 #link{
     display: inline;
     font-size: 30px;
-    padding-left: 2%;
+    padding-right: 2.5%;
 }
 
 textarea{
@@ -35,4 +41,21 @@ body{
 ::-webkit-scrollbar{
     width: 0px;
     background: transparent;
+}
+
+#sb{
+    width: 50%;
+    font-size: 25px;
+    border-radius: 10px;
+    margin-top: 15px; 
+}
+
+#ct{
+    border-radius: 10px;
+    height: 30%;
+    margin: 10px auto auto auto;
+}
+
+#d{
+    margin-top: 10%;
 }
