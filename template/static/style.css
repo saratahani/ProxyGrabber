@@ -43,7 +43,7 @@ body{
     background: transparent;
 }
 
-#sb{
+#sb, #ab{
     width: 50%;
     font-size: 25px;
     border-radius: 10px;
@@ -52,10 +52,17 @@ body{
 
 #ct{
     border-radius: 10px;
-    height: 30%;
     margin: 10px auto auto auto;
 }
 
 #d{
     margin-top: 10%;
+}
+
+#ps{
+    border-radius: 12px;
+}
+
+#v{
+    margin-top: 20%;
 }

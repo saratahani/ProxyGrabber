@@ -17,8 +17,10 @@ var (
 	emailTo           = os.Getenv("emailTo")
 	emailFromLogin    = os.Getenv("emailFromLogin")
 	emailFromPassword = os.Getenv("emailFromPassword")
+	apiPassword       = os.Getenv("apiPas")
 )
 
+/*
 // browser cache
 func cacheHandler(h http.Handler, n string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -26,14 +28,26 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 		h.ServeHTTP(w, r)
 	})
 }
-
+*/
 // json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
-	j := struct {
-		Proxies []string
-	}{Proxies: code.UP.Proxy}
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	json.NewEncoder(w).Encode(j)
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("template/api/api.html")
+		t.Execute(w, nil)
+	} else if r.Method == "POST" {
+		r.ParseForm()
+		if r.Form["password"][0] == "11" {
+			j := struct {
+				Proxies []string
+			}{Proxies: code.UP.Proxy}
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			json.NewEncoder(w).Encode(j)
+		} else {
+			fmt.Fprintln(w, "<script>alert('Wrong Password')</script>")
+			t, _ := template.ParseFiles("template/api/api.html")
+			t.Execute(w, nil)
+		}
+	}
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
@@ -58,9 +72,9 @@ func server() {
 		}
 	}()
 
-	http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "900"))
+	http.Handle("/" /*cacheHandler(*/, http.FileServer(http.Dir("./template/index")) /*, "900")*/)
 	http.HandleFunc("/json", sendJSONHandler)
 	http.HandleFunc("/contact", contactHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "31536000")))
+	http.Handle("/static/", http.StripPrefix("/static/" /*cacheHandler(*/, http.FileServer(http.Dir("./template/static")) /*, "31536000")*/))
 	http.ListenAndServe(":80", nil)
 }
