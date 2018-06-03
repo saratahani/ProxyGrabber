@@ -44,9 +44,8 @@ body{
 }
 
 #sb, #ab{
-    width: 50%;
-    font-size: 25px;
-    border-radius: 10px;
+    width: 35%;
+    border-radius: 15px;
     margin-top: 15px; 
 }
 
@@ -56,7 +55,7 @@ body{
 }
 
 #d{
-    margin-top: 10%;
+    margin-top: 15%;
 }
 
 #ps{

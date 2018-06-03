@@ -13,11 +13,12 @@ import (
 )
 
 var (
-	emailFrom         = os.Getenv("emailFrom")
-	emailTo           = os.Getenv("emailTo")
-	emailFromLogin    = os.Getenv("emailFromLogin")
-	emailFromPassword = os.Getenv("emailFromPassword")
-	apiPassword       = os.Getenv("apiPas")
+	emailFrom         = os.Getenv("EF")
+	emailTo           = os.Getenv("ET")
+	emailFromLogin    = os.Getenv("EFL")
+	emailFromPassword = os.Getenv("EFP")
+	apiPassword       = os.Getenv("APIPAS")
+	corsAddrSite      = os.Getenv("CORSS")
 )
 
 /*
@@ -30,23 +31,26 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 }
 */
 
+func apiTemplate() (t *template.Template) {
+	t, _ = template.ParseFiles("template/api/api.html")
+	return
+}
+
 // json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("template/api/api.html")
-		t.Execute(w, nil)
+		apiTemplate().Execute(w, nil)
 	} else if r.Method == "POST" {
 		r.ParseForm()
-		if r.Form["password"][0] == "11" {
+		if r.Form["password"][0] == apiPassword {
 			j := struct {
 				Proxies []string
 			}{Proxies: code.UP.Proxy}
-			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Origin", corsAddrSite)
 			json.NewEncoder(w).Encode(j)
 		} else {
 			fmt.Fprintln(w, "<script>alert('Wrong Password')</script>")
-			t, _ := template.ParseFiles("template/api/api.html")
-			t.Execute(w, nil)
+			apiTemplate().Execute(w, nil)
 		}
 	}
 }
