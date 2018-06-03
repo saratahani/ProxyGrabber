@@ -29,6 +29,7 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 	})
 }
 */
+
 // json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
@@ -72,9 +73,11 @@ func server() {
 		}
 	}()
 
-	http.Handle("/" /*cacheHandler(*/, http.FileServer(http.Dir("./template/index")) /*, "900")*/)
+	/* http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "900")) */
+	http.Handle("/", http.FileServer(http.Dir("./template/index")))
 	http.HandleFunc("/json", sendJSONHandler)
 	http.HandleFunc("/contact", contactHandler)
-	http.Handle("/static/", http.StripPrefix("/static/" /*cacheHandler(*/, http.FileServer(http.Dir("./template/static")) /*, "31536000")*/))
+	/* http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "31536000"))) */
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./template/static"))))
 	http.ListenAndServe(":80", nil)
 }
