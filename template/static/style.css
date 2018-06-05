@@ -65,3 +65,27 @@ body{
 #v{
     margin-top: 20%;
 }
+
+#proto{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#chan{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#b{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#tb{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}

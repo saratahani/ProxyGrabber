@@ -3,8 +3,11 @@ package code
 import (
 	"golang.org/x/net/html"
 	"net/http"
+	"os"
 	"regexp"
 )
+
+var target = os.Getenv("TARGET")
 
 //getTag getting tags from site
 func getTag() []string {
@@ -12,7 +15,7 @@ func getTag() []string {
 
 	r := regexp.MustCompile(`^http://www.socksproxylist24.top/\d.*html$`)
 
-	re, _ := http.Get(`http://www.socksproxylist24.top/`)
+	re, _ := http.Get(target)
 
 	z := html.NewTokenizer(re.Body)
 
