@@ -1,4 +1,4 @@
-h1, h2, h5{
+h1, h2, h5, h6{
     color: white;
 }
 
@@ -65,7 +65,7 @@ body{
 #v{
     margin-top: 20%;
 }
-
+/*
 #proto{
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -88,4 +88,4 @@ body{
 #tb{
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-}
+}*/
