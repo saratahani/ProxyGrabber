@@ -6,13 +6,16 @@ import (
 	"io/ioutil"
 	"net"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 )
 
-const (
-	timeout = time.Duration(2000 * time.Millisecond)
-	tt      = time.Duration(300 * time.Millisecond)
+var (
+	tm, _         = time.ParseDuration(os.Getenv(""))
+	dtm, _        = time.ParseDuration(os.Getenv(""))
+	timeout       = time.Duration(tm * time.Millisecond)
+	dialerTimeout = time.Duration(dtm * time.Millisecond)
 )
 
 // checkProxySOCKS Check proxies on valid
@@ -20,8 +23,8 @@ func checkProxySOCKS(prox string, c chan QR, wg *sync.WaitGroup) (err error) {
 	defer wg.Done()
 
 	d := net.Dialer{
-		Timeout:   tt,
-		KeepAlive: tt,
+		Timeout:   dialerTimeout,
+		KeepAlive: dialerTimeout,
 	}
 
 	dialer, _ := proxy.SOCKS5("tcp", prox, nil, &d)
