@@ -10,7 +10,11 @@ import (
 	"time"
 )
 
+<<<<<<< HEAD
 var (
+=======
+const (
+>>>>>>> b665c3f1a5d3232fbff6e5aa7d496646cb2258d3
 	timeout       = time.Duration(1500 * time.Millisecond)
 	dialerTimeout = time.Duration(200 * time.Millisecond)
 )
