@@ -7,13 +7,16 @@ import (
 	"regexp"
 )
 
-var target = os.Getenv("TARGET")
+var (
+	target = os.Getenv("TARGET")
+	reg    = os.Getenv("REG")
+)
 
 //getTag getting tags from site
 func getTag() []string {
 	var links []string
 
-	r := regexp.MustCompile(`^http://www.socksproxylist24.top/\d.*html$`)
+	r := regexp.MustCompile(reg)
 
 	re, _ := http.Get(target)
 

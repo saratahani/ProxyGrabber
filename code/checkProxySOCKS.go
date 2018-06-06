@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	timeout = time.Duration(2000 * time.Millisecond)
-	tt      = time.Duration(300 * time.Millisecond)
+	timeout       = time.Duration(1500 * time.Millisecond)
+	dialerTimeout = time.Duration(400 * time.Millisecond)
 )
 
 // checkProxySOCKS Check proxies on valid
@@ -20,8 +20,8 @@ func checkProxySOCKS(prox string, c chan QR, wg *sync.WaitGroup) (err error) {
 	defer wg.Done()
 
 	d := net.Dialer{
-		Timeout:   tt,
-		KeepAlive: tt,
+		Timeout:   dialerTimeout,
+		KeepAlive: dialerTimeout,
 	}
 
 	dialer, _ := proxy.SOCKS5("tcp", prox, nil, &d)
