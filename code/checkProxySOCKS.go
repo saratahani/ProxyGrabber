@@ -12,7 +12,7 @@ import (
 
 const (
 	timeout       = time.Duration(1500 * time.Millisecond)
-	dialerTimeout = time.Duration(200 * time.Millisecond)
+	dialerTimeout = time.Duration(400 * time.Millisecond)
 )
 
 // checkProxySOCKS Check proxies on valid

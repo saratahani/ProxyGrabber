@@ -3,10 +3,10 @@ h1, h2, h5, h6{
 }
 
 .btn{
-    margin-top: 1.5%;
+    margin-top: 1%;
     color: dodgerblue;
     border-radius: 50px;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 #contact{
@@ -65,27 +65,38 @@ body{
 #v{
     margin-top: 20%;
 }
-/*
+
 #proto{
+    margin-right: 8px;
+    padding-left: 48px;
+    padding-right: 31px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 #chan{
+    padding-right: 22px;
+    padding-left: 7px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
-    border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
 #b{
+    margin-right: 2px;
+    margin-left: 6.6px;
+    padding-right: 16px;
+    margin-top: 0.2%;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
 }
 
 #tb{
+    padding-left: 12px;
+    margin-top: 0.2%;
     border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-}*/
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
