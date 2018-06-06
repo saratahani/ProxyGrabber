@@ -6,16 +6,13 @@ import (
 	"io/ioutil"
 	"net"
 	"net/http"
-	"os"
 	"sync"
 	"time"
 )
 
-var (
-	tm, _         = time.ParseDuration(os.Getenv(""))
-	dtm, _        = time.ParseDuration(os.Getenv(""))
-	timeout       = time.Duration(tm * time.Millisecond)
-	dialerTimeout = time.Duration(dtm * time.Millisecond)
+const (
+	timeout       = time.Duration(1500 * time.Millisecond)
+	dialerTimeout = time.Duration(200 * time.Millisecond)
 )
 
 // checkProxySOCKS Check proxies on valid
