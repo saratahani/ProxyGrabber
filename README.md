@@ -9,15 +9,20 @@ On http://tproxyt.tk you can find live example
 
 # Get Started
 
-You can start app with
+For start, build docker image from Dockerfile and run with this command
 ```
-./ProxyGrabber
-```
-and then open http://localhost
-
-Or build docker image from Dockerfile and run with this command
-```
-docker run -d -p 80:80 --restart always image_name
+docker run -d \
+-p 80:80 \
+-e EF=email_from \
+-e EFL=email_from_login \
+-e EFP=email_from_password \
+-e APIPAS=api_password \
+-e CORSS=authorized_domain \
+-e TARGET=target_site \
+-e REG=regular_expression \
+-e ET=email_to \
+--restart always \
+image_name
 ```
 and then open http://localhost or http://your_server_ip
 
