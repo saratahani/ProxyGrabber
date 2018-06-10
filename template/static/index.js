@@ -35,7 +35,7 @@ function proxyButton() {
         .then((out) => {
             randomNumber = Math.floor((Math.random() * out.Proxies.length) + 0);
             randomProxy = out.Proxies[randomNumber].split(":");
-            document.getElementById('b').setAttribute("href", 'tg://socks?server=' + randomProxy[0] + '&port=' + randomProxy[1]);
+            document.getElementById('socks').setAttribute("href", 'tg://socks?server=' + randomProxy[0] + '&port=' + randomProxy[1]);
         })
         .catch(err => { throw err; });
 }

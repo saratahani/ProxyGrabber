@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	timeout       = time.Duration(2000 * time.Millisecond)
+	timeout       = time.Duration(1000 * time.Millisecond)
 	dialerTimeout = time.Duration(500 * time.Millisecond)
 )
 

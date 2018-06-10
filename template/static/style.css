@@ -4,8 +4,7 @@ h4, h5, h6{
 
 .btn{
     color: dodgerblue;
-    border-radius: 50px;
-    font-size: 21.8px;
+    font-size: 25px;
 }
 
 #contact{
@@ -65,40 +64,25 @@ body{
     margin-top: 20%;
 }
 
-#proto{
-    margin-right: 9px;
-    padding-left: 46px;
-    padding-right: 31px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
+#mtproto{
+    padding-right: 0px;
+    width: 174px;
+    border-radius: 47px 0px 0px 0px;
 }
 
-#chan{
-    padding-right: 23px;
-    padding-left: 3px;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+#socks{
+    padding-left: 0px;
+    width: 108px;
+    border-radius: 0px 47px 0px 0px;
 }
 
-#b{
-    margin-right: 2px;
-    margin-left: 8.6px;
-    padding-right: 19px;
-    padding-left: 4px;
-    margin-top: 0.2%;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 0px;
+#channel{
+    padding-left: 0px;
+    width: 108px;
+    border-radius: 0px 0px 47px 0px;
 }
 
-#tb{
-    height: 47px;
-    padding-left: 17px;
-    padding-right: 5px;
-    margin-top: 0.2%;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+#bot{
+    width: 174px;
+    border-radius: 0px 0px 0px 47px;
 }
