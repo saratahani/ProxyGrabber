@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/trigun117/ProxyGrabber.svg?branch=master)](https://travis-ci.org/trigun117/ProxyGrabber) [![codecov](https://codecov.io/gh/trigun117/ProxyGrabber/branch/master/graph/badge.svg)](https://codecov.io/gh/trigun117/ProxyGrabber) [![Go Report Card](https://goreportcard.com/badge/github.com/trigun117/ProxyGrabber)](https://goreportcard.com/report/github.com/trigun117/ProxyGrabber)
 # ProxyGrabber
 
-SOCKS5 ProxyGrabber
+ProxyGrabber
 
 ![site screenshot](https://github.com/trigun117/ProxyGrabber/blob/master/image.JPG)
 
