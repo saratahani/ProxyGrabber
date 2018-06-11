@@ -21,7 +21,6 @@ var (
 	corsAddrSite      = os.Getenv("CORSS")
 )
 
-/*
 // browser cache
 func cacheHandler(h http.Handler, n string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -29,7 +28,6 @@ func cacheHandler(h http.Handler, n string) http.Handler {
 		h.ServeHTTP(w, r)
 	})
 }
-*/
 
 func apiTemplate() (t *template.Template) {
 	t, _ = template.ParseFiles("template/api/api.html")
@@ -77,11 +75,9 @@ func server() {
 		}
 	}()
 
-	/* http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "900")) */
-	http.Handle("/", http.FileServer(http.Dir("./template/index")))
+	http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "600"))
 	http.HandleFunc("/json", sendJSONHandler)
 	http.HandleFunc("/contact", contactHandler)
-	/* http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "31536000"))) */
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./template/static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "1800")))
 	http.ListenAndServe(":80", nil)
 }
