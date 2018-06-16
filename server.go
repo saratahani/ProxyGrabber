@@ -22,9 +22,9 @@ var (
 )
 
 // browser cache
-func cacheHandler(h http.Handler, n string) http.Handler {
+func cacheHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Cache-Control", "max-age="+n)
+		w.Header().Set("Cache-Control", "max-age=600")
 		h.ServeHTTP(w, r)
 	})
 }
@@ -53,6 +53,7 @@ func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// contact form
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("template/contact/contact.html")
@@ -75,9 +76,9 @@ func server() {
 		}
 	}()
 
-	http.Handle("/", cacheHandler(http.FileServer(http.Dir("./template/index")), "600"))
+	http.Handle("/", http.FileServer(http.Dir("./template/index")))
 	http.HandleFunc("/json", sendJSONHandler)
 	http.HandleFunc("/contact", contactHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", cacheHandler(http.FileServer(http.Dir("./template/static")), "1800")))
-	http.ListenAndServe(":80", nil)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./template/static"))))
+	http.ListenAndServe(":80", cacheHandler(http.DefaultServeMux))
 }
