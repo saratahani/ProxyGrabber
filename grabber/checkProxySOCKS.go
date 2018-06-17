@@ -1,4 +1,4 @@
-package code
+package grabber
 
 import (
 	"golang.org/x/net/proxy"

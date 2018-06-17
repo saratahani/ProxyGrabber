@@ -3,8 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/trigun117/ProxyGrabber/code"
-	"html/template"
+	"github.com/trigun117/ProxyGrabber/grabber"
 	"net/http"
 	"net/smtp"
 	"os"
@@ -29,26 +28,20 @@ func cacheHandler(h http.Handler) http.Handler {
 	})
 }
 
-func apiTemplate() (t *template.Template) {
-	t, _ = template.ParseFiles("template/api/api.html")
-	return
-}
-
 // json response
 func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		apiTemplate().Execute(w, nil)
+		http.ServeFile(w, r, "template/api/api.html")
 	} else if r.Method == "POST" {
 		r.ParseForm()
 		if r.Form["password"][0] == apiPassword {
 			j := struct {
 				Proxies []string
-			}{Proxies: code.UP.Proxy}
+			}{Proxies: grabber.UP.Proxy}
 			w.Header().Set("Access-Control-Allow-Origin", corsAddrSite)
 			json.NewEncoder(w).Encode(j)
 		} else {
-			fmt.Fprintln(w, "<script>alert('Wrong Password')</script>")
-			apiTemplate().Execute(w, nil)
+			http.ServeFile(w, r, "template/api/api.html")
 		}
 	}
 }
@@ -56,8 +49,7 @@ func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 // contact form
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("template/contact/contact.html")
-		t.Execute(w, nil)
+		http.ServeFile(w, r, "template/contact/contact.html")
 	} else if r.Method == "POST" {
 		r.ParseForm()
 		body := fmt.Sprintf("Name: %s\n Email: %s\n Message: %s", r.Form["name"][0], r.Form["email"][0], r.Form["message"][0])
@@ -71,7 +63,7 @@ func server() {
 	go func() {
 		for {
 			defer runtime.GC()
-			code.FetchFreshProxies()
+			grabber.FetchFreshProxies()
 			time.Sleep(2 * time.Minute)
 		}
 	}()

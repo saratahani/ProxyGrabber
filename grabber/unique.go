@@ -1,4 +1,4 @@
-package code
+package grabber
 
 //unique check slice on uniqueness
 func unique(intSlice []string) []string {

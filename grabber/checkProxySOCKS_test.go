@@ -1,4 +1,4 @@
-package code
+package grabber
 
 import (
 	"sync"
@@ -23,7 +23,7 @@ func TestCheckProxySOCKS(t *testing.T) {
 	}
 
 	wg.Add(1)
-	checkProxySOCKS(`95.110.227.5:43106`, ch, &wg)
+	checkProxySOCKS(`178.32.57.117:1080`, ch, &wg)
 
 	r = <-ch
 
