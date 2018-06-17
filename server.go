@@ -1,15 +1,23 @@
 package main
 
 import (
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"github.com/trigun117/ProxyGrabber/grabber"
+	"io"
 	"net/http"
 	"net/smtp"
 	"os"
 	"runtime"
+	"strings"
 	"time"
 )
+
+type gzipResponseWriter struct {
+	io.Writer
+	http.ResponseWriter
+}
 
 var (
 	emailFrom         = os.Getenv("EF")
@@ -17,14 +25,25 @@ var (
 	emailFromLogin    = os.Getenv("EFL")
 	emailFromPassword = os.Getenv("EFP")
 	apiPassword       = os.Getenv("APIPAS")
-	corsAddrSite      = os.Getenv("CORSS")
 )
 
-// browser cache
-func cacheHandler(h http.Handler) http.Handler {
+func (w gzipResponseWriter) Write(b []byte) (int, error) {
+	return w.Writer.Write(b)
+}
+
+// gzip compression
+func gzipHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// set cache control
 		w.Header().Set("Cache-Control", "max-age=600")
-		h.ServeHTTP(w, r)
+		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+			h.ServeHTTP(w, r)
+			return
+		}
+		w.Header().Set("Content-Encoding", "gzip")
+		gz := gzip.NewWriter(w)
+		defer gz.Close()
+		h.ServeHTTP(gzipResponseWriter{Writer: gz, ResponseWriter: w}, r)
 	})
 }
 
@@ -38,7 +57,7 @@ func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 			j := struct {
 				Proxies []string
 			}{Proxies: grabber.UP.Proxy}
-			w.Header().Set("Access-Control-Allow-Origin", corsAddrSite)
+			w.Header().Set("Access-Control-Allow-Origin", "*")
 			json.NewEncoder(w).Encode(j)
 		} else {
 			http.ServeFile(w, r, "template/api/api.html")
@@ -72,5 +91,5 @@ func server() {
 	http.HandleFunc("/json", sendJSONHandler)
 	http.HandleFunc("/contact", contactHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./template/static"))))
-	http.ListenAndServe(":80", cacheHandler(http.DefaultServeMux))
+	http.ListenAndServe(":80", gzipHandler(http.DefaultServeMux))
 }
