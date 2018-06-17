@@ -25,7 +25,6 @@ var (
 	emailFromLogin    = os.Getenv("EFL")
 	emailFromPassword = os.Getenv("EFP")
 	apiPassword       = os.Getenv("APIPAS")
-	corsAddrSite      = os.Getenv("CORSS")
 )
 
 func (w gzipResponseWriter) Write(b []byte) (int, error) {
@@ -58,7 +57,7 @@ func sendJSONHandler(w http.ResponseWriter, r *http.Request) {
 			j := struct {
 				Proxies []string
 			}{Proxies: grabber.UP.Proxy}
-			w.Header().Set("Access-Control-Allow-Origin", corsAddrSite)
+			w.Header().Set("Access-Control-Allow-Origin", "*")
 			json.NewEncoder(w).Encode(j)
 		} else {
 			http.ServeFile(w, r, "template/api/api.html")
