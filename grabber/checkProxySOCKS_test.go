@@ -23,7 +23,7 @@ func TestCheckProxySOCKS(t *testing.T) {
 	}
 
 	wg.Add(1)
-	checkProxySOCKS(`91.235.129.157:1080`, ch, &wg)
+	checkProxySOCKS(`204.48.20.127:1080`, ch, &wg)
 
 	r = <-ch
 

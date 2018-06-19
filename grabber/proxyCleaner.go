@@ -15,6 +15,7 @@ func cleaner(url string) string {
 	response, _ := http.Get(url)
 
 	b, _ := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
 
 	r := strings.NewReader(string(b))
 
