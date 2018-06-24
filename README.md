@@ -17,7 +17,6 @@ docker run -d \
 -e EFL=email_from_login \
 -e EFP=email_from_password \
 -e APIPAS=api_password \
--e CORSS=authorized_domain \
 -e TARGET=target_site \
 -e REG=regular_expression \
 -e ET=email_to \
